@@ -143,8 +143,9 @@ handle_call({create, Name}, _From, State) ->
 
 handle_call({get_and_remove_raw_data}, _From, State) ->
     Data = get_raw_data(),
-    [lager:info("Hist ~p, size ~p", [Hist, erlang:length(HistData)]) || {Hist, HistData} <- Data],
+    [lager:info("Hist ~p on ~p, size ~p", [Hist, node(), erlang:length(HistData)]) || {Hist, HistData} <- Data],
     [notify_many(Hist, K, -V) || {Hist, HistData} <- Data, {K, V} <- HistData],
+    lager:info("Hist rest finished on ~p", [node()]),
     {reply, {ok, Data}, State};
 
 handle_call(Req, _From, State) ->
