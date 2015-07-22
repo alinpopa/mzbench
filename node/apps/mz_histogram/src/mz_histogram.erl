@@ -143,6 +143,7 @@ handle_call({create, Name}, _From, State) ->
 
 handle_call({get_and_remove_raw_data}, _From, State) ->
     Data = get_raw_data(),
+    [lager:info("Hist ~p, size ~p", [Hist, erlang:length(HistData)]) || {Hist, HistData} <- Data],
     [notify_many(Hist, K, -V) || {Hist, HistData} <- Data, {K, V} <- HistData],
     {reply, {ok, Data}, State};
 
