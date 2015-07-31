@@ -116,7 +116,7 @@ director_sname(#{id:= Id}) -> "mzb_director" ++ integer_to_list(Id).
 worker_sname(#{id:= Id})   -> "mzb_worker" ++ integer_to_list(Id).
 
 vm_args_content(NodeName) ->
-    io_lib:format("-sname ~s~n", [NodeName]).
+    io_lib:format("-sname ~s~n+A 32~n", [NodeName]).
 
 get_host_os_id(UserName, Host, Logger) ->
     string:to_lower(mzb_string:char_substitute(lists:flatten(mzb_subprocess:remote_cmd(UserName, [Host], "uname -sr", [], Logger, [])), $ , $-)).
