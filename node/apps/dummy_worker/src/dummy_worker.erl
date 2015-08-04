@@ -6,7 +6,7 @@
 -type state() :: string().
 
 -spec initial_state() -> state().
-initial_state() -> lists:seq(0, 10000).
+initial_state() -> "".
 
 metrics() -> [[{"print", counter}, {"print_2", counter}], {"dummy", histogram}, {"stuff", counter}].
 
